@@ -26,7 +26,8 @@ SECRET_KEY = 'yt5dc8tb%(u!io7z973ta5k+o$7bo=!jbt8r(+c!fzdn3+iz=^'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  'dev.haipump.com'
+  'dev.haipump.com',
+  'localhost'
 ]
 
 
