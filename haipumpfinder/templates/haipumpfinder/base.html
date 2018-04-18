@@ -1,0 +1,67 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+    
+<meta charset="utf-8">
+<head>   
+<title>HAI Pump -- What is the HAI Pump?</title>
+<meta name="description" content="Find a Hospital offer the HAI PUMP near you. Get directions, meet others who are trying the HAI Pump and joing the Colontown neighborhood." />
+<meta property="og:title" content="Locations | HAI Pump Hospital" />
+<meta property="og:description" content="Find a Hosptial offering the HAI Pump for Stage 4 Colon Cancer Patients and Caregivers. Get directions, meet others who are trying the HAI Pump and joing the Colontown neighborhood." />
+
+<style>
+    #map {
+      height: 400px;
+      width: 400px;
+     }
+  </style>  
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static '/haipumpfinder/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/haipumpfinder/sticky-footer.css' %}" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/haipumpfinder">HAI Pump Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/haipumpfinder">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="/haipumpfinder/what-the-hai">What is the HAI Pump?</a>
+                  </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../haipumpfinder/hai-in-the-news">In the News</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" target="_new" href="https://clinicaltrials.gov/ct2/show/NCT03366155">Join the HAI Pump Clinical Trial</a>
+              </li>
+              
+          </ul>
+           
+        </div>
+      </nav>
+
+
+    
+    {% block content %}{% endblock content %}
+
+
+<footer class="footer">
+<div class="container">
+<span class="text-muted">Complaints? Better ideas? Don't hesitate! <a href="mailto:mike@radiantdays.com">mike@radiantdays.com</a></span>
+</div>
+</footer> 
+</body>
+</html>

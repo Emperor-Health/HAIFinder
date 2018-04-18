@@ -1,0 +1,170 @@
+{% extends 'haipumpfinder/base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+<div class="container">
+        <p></p>
+<h1>Let's find some HAI Pumps!</h1>       
+<div id="map-canvas"></div>
+</div>
+<div class="container">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+{% if hospital_list %}
+<table id="HaiPumpTable" class="table table-hover" style="width:100%">
+        <thead>
+          <tr>
+            <th scope="col">Cancer Clinic</th>
+            <th scope="col">Location</th>
+            <th scope="col">Lat.</th>
+            <th scope="col">Long.</th>
+            <th scope="col"># of HAI Pumps/Year</th>
+            <th scope="col"># CT members</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+
+          
+    {%  for hospital in hospital_list %}
+        <tr>
+        <td><a href="{% url 'haipumpfinder:detail' hospital.id %}">{{ hospital.name }}</a></td>
+        <td class="CityState">{{ hospital.city }}, {{ hospital.state }} </td>
+        <td class="Lat">{{ hospital.latitude }}</td>
+        <td class="Long">{{ hospital.longitude }} </td>
+       <td><span class="badge badge-primary badge-pill"> {{ hospital.guestimated_of_hai_implants_per_year }}</span></td>
+        <td><span class="badge badge-primary badge-pill"> {{ hospital.field_colontown_patients }}</span></td>
+    </tr>
+    {% endfor %}
+  
+</tbody>
+</table>
+
+{% else %}
+    <p>No hospitals are available.</p>
+{% endif %}
+</div>
+  
+ 
+ 
+
+<script>
+
+        var geocoder;
+        var map;
+        function initMap() {
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(37.09024, -95.712891);
+            var mapOptions = {
+              zoom: 4,
+              center: latlng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+          }
+         
+
+function fillMap(callback) {
+   
+    var clinics = [];
+        
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 4,
+        center: new google.maps.LatLng(37.09024, -95.712891),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      
+      var HaiPumpTable = $('#HaiPumpTable').DataTable();
+       HaiPumpTable.rows().every(function(){
+           clinics.push({'name' : this.data()[0], 
+             'city_state' : this.data()[1],
+             'lat' : this.data()[2], 
+             'long' : this.data()[3],
+             'number_of_pumps' : this.data()[4],
+             'ct_patients' : this.data()[5],
+            });
+            
+       })
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        for (i = 0; i < clinics.length; i++) 
+        {
+            marker = new google.maps.Marker(
+            {
+                position: new google.maps.LatLng(clinics[i].lat, clinics[i].long),
+                map: map
+            });
+    
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(clinics[i].name + "<br>" + clinics[i].city_state + 
+                    "<br># of Pumps Implanted: " +  clinics[i].number_of_pumps + 
+                    "<br>Colontown Patients: " +  clinics[i].ct_patients );
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+ 
+ 
+ 
+      window.onload = function() {
+          initMap();
+          //codeAddress();
+          fillMap(function() {
+            // Do something after getting done with Geocoding of multiple addresses
+              }); 
+                 
+              } 
+
+  
+    
+  </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxfDqt23sS87Q8ITlvZot6ADUhbSNkLEM&callback=initMap">
+      </script> 
+ 
+<div class="container">
+        
+        <p>If you have questions or are interested in meeting others who have tried the HAI Pump, there'a a HAI Pump support group in <a href="https://colontown.org/colontown-intake-form/" title="Colontown" target="_new">ColonTown</a>. 
+        </p>
+        <p> 
+    We discuss side-effects, doctors, hospitals, and more. We highly recommend joining. 
+    We recommend that any Colorectal Cancer Patient or Caregiver join. 
+        </p>
+    </div> 
+    
+    <div class="container">
+            <p> (Colontown does not endorse this site or HAI Pump treatment. I'm just a huge fan. It's a phenomenal community  of more than 80 “secret” groups on Facebook for colorectal patients, survivors, and caregivers. I'm a member and have found it to be an amazing community and place for information.)</br>   
+           </p>
+    
+     
+    </div>
+    
+    
+    <script>
+            $(document).ready(function() {
+                $('#HaiPumpTable').DataTable({
+                    "pageLength": 25,
+                    "lengthChange": false,
+                    "columnDefs": [
+                    {
+                       "targets": [ 2 ],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                    "targets": [ 3 ],
+                     "visible": false
+                     }
+                            ]
+                });
+            } );
+
+           
+    </script>
+{% endblock %}

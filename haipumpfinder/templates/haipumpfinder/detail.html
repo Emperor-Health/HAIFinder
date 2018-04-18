@@ -1,0 +1,115 @@
+{% extends 'haipumpfinder/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+            <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary" onclick="goBack()">< Back</button>
+                  
+            </div>
+            <script>
+                        function goBack() {
+                            window.history.back();
+                        }
+                        </script>
+            <p></p>
+            <h1>{{ hospital.name }}</h1>
+            <p>Short intro</p>      
+            <div class="row">
+                  <div class="col-sm-2">
+                  Address: 
+                  </div>
+                  <div class="col-sm-2">
+                        {{ hospital.address }} 
+                  </div>
+            </div>
+            <div class="row">
+                  <div class="col-sm-2">
+                   City: 
+                  </div>
+                  <div class="col-sm-2">
+                      {{ hospital.city }}, {{ hospital.state }} {{ hospital.zip }}    
+                  </div>
+            </div>
+            <div class="row">
+                        <div class="col-sm-2">
+                         # of CT Patients
+                        </div>
+                        <div class="col-sm-2">
+                              <span class="badge badge-primary badge-pill"> 
+                               {{ hospital.field_colontown_patients }}  
+                              </span>     
+                        </div>
+            </div>
+                  
+            <div class="row">
+                  <div class="col-sm-2">
+                   Estimated implants per year
+                  </div>
+                  <div class="col-sm-2">
+                  <span class="badge badge-primary badge-pill"> 
+                        {{ hospital.guestimated_of_hai_implants_per_year }}  
+                  </span>
+                  </div>
+            </div>
+            <div class="row">
+                        <div class="col-sm-2">
+                         Website:
+                        </div>
+                        <div class="col-sm-2">
+                              <!-- TODO Grab logos
+                                    <img src=" https://apresgroup.com/wp-content/uploads/2017/02/iu-e1491373574945.png" 
+                               class="img-thumbnail" alt="{{ hospital.name }}">
+                              -->
+                             
+                              <a href="{{ hospital.url }}" target="_blank" title="{{ hospital.name }}">{{ hospital.url }}</a>
+                        </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-4">
+
+<!-- <h3>Location: {{ hospital.address }} {{ hospital.city }}, {{ hospital.state }}</h3> -->
+
+<div id="map-canvas"></div>
+                  </div>
+      </div>
+<script>
+
+      var geocoder;
+      var map;
+   function initMap() {
+      geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(37.09024, -95.712891);
+      var mapOptions = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    }
+    function codeAddress() {
+      var address = '{{ hospital.address }} {{ hospital.city }}, {{ hospital.state }}';
+      geocoder.geocode( { address: address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+        } else {
+        alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    }
+    
+    window.onload = function() {
+        initMap();
+        codeAddress();
+    }
+
+  
+</script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxfDqt23sS87Q8ITlvZot6ADUhbSNkLEM&callback=initMap">
+    </script>
+      {% endblock %}
