@@ -25,7 +25,9 @@ SECRET_KEY = 'yt5dc8tb%(u!io7z973ta5k+o$7bo=!jbt8r(+c!fzdn3+iz=^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  'dev.haipump.com'
+]
 
 
 # Application definition
@@ -79,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbHAIPump',
-        'USER': 'haipump',
+        'USER': 'HaiPumpAdmin',
         'PASSWORD': 'Kemeny123$$',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'dbhaipumpfinder.cldssuli5jvk.us-east-2.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
 
