@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
   'dev.haipump.com',
-  'localhost'
+  'localhost',
+  '127.0.0.1'
 ]
 
 
