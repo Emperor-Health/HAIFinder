@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'haipumpfinder/base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+<div class="container">
+        <p></p>
+<h1>Let's find some clinical trials!</h1>  
+{% if locations_list %}
+<ul>
+{% for location in locations_list.all %}
+    <li>{{ location.site_name }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
