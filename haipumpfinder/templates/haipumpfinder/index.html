@@ -54,6 +54,25 @@
 
 <script>
 
+  //make the datatable
+        $(document).ready(function() {
+            $('#HaiPumpTable').DataTable({
+                "pageLength": 25,
+                "lengthChange": false,
+                "columnDefs": [
+                {
+                   "targets": [ 2 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                "targets": [ 3 ],
+                 "visible": false
+                 }
+                        ]
+            });
+        } );
+
         var geocoder;
         var map;
         function initMap() {
@@ -148,25 +167,7 @@ function fillMap(callback) {
     </div>
     
     
-    <script>
-            $(document).ready(function() {
-                $('#HaiPumpTable').DataTable({
-                    "pageLength": 25,
-                    "lengthChange": false,
-                    "columnDefs": [
-                    {
-                       "targets": [ 2 ],
-                        "visible": false,
-                        "searchable": false
-                    },
-                    {
-                    "targets": [ 3 ],
-                     "visible": false
-                     }
-                            ]
-                });
-            } );
 
            
-    </script>
+   
 {% endblock %}

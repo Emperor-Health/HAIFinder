@@ -5,27 +5,20 @@
     
 <meta charset="utf-8">
 <head>   
-<title>HAI Pump -- What is the HAI Pump?</title>
+<title>HAI Pump Finder- Finds clinics offers the HAI Pump Treatment</title>
 <meta name="description" content="Find a Cancer Clinic or Hospital offering the HAI PUMP near you. Get directions, meet others trying the HAI Pump by joining Colontown." />
 <meta property="og:title" content="Locations | HAI Pump Clinics" />
 <meta property="og:description" content="Find a Cancer Clinic or Hospital offering the HAI PUMP near you. Get directions, meet others trying the HAI Pump by joining Colontown." />
 
-<style>
-    #map {
-      height: 400px;
-      width: 400px;
-     }
-  </style>  
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/haipumpfinder/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/haipumpfinder/sticky-footer.css' %}" />
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="{% static '/haipumpfinder/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/haipumpfinder/sticky-footer.css' %}" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

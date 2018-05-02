@@ -1,17 +1,36 @@
 from django.shortcuts import get_object_or_404, render, HttpResponse
 from django.http import HttpResponseRedirect
+from django.template import Context, Template
 from django.urls import reverse
 from django.views import generic
 #import pdb; pdb.set_trace()
 from .services import Trial, TrialLocation
 from .models import Hospital
+ 
 
 
 
 
-def trial(request):
-    print('Got here bitch!')
-    return HttpResponse("Got test to Trial!") 
+
+def trial(request,trial_id):
+    t = Trial()
+    trial_name = t.get_name(trial_id) 
+    #print("Trial Name: " + trial_name)
+    sites_list = t.get_locations(trial_id) 
+    #print(len(sites_list))
+    sites_dict = {
+        'sites_list': sites_list,
+        'trial_name': trial_name,
+        'trial_id': trial_id 
+
+    }
+    return render(request,'haipumpfinder/trial.html', sites_dict)
+
+# console.log('Got here bitch!')
+#sites_list = Trial.locations('NCT02928224')
+#print("Sites Count: " + sites_list[0].city)
+#return HttpResponse("Got test to Trial!")
+#return render(request,'trial.html',sites_list) 
 
 
 
@@ -21,15 +40,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return all published hospitals."""
         return Hospital.objects.order_by('id')
-        
-
-#class TrialLocationPage(generic.TemplateView):
-#    def get(self,request):
-#        console.log("got here")
-#        sites_list = services.get_trial_locations('NCT02928224')
-#        return render(request,'clinical_trials_by_location.html',sites_list)
-
-    
 
 
 class DetailView(generic.DetailView):

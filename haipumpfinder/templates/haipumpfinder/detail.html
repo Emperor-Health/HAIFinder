@@ -71,7 +71,7 @@
 
 <!-- <h3>Location: {{ hospital.address }} {{ hospital.city }}, {{ hospital.state }}</h3> -->
 
-<div id="map-canvas"></div>
+<div id="trialmap-canvas"></div>
                   </div>
       </div>
       </div>
@@ -87,7 +87,7 @@
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
-      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+      map = new google.maps.Map(document.getElementById("trialmap-canvas"), mapOptions);
     }
     function codeAddress() {
       var address = '{{ hospital.address }} {{ hospital.city }}, {{ hospital.state }}';
