@@ -21,7 +21,8 @@ def trial(request,trial_id):
     sites_dict = {
         'sites_list': sites_list,
         'trial_name': trial_name,
-        'trial_id': trial_id 
+        'trial_id': trial_id,
+         
 
     }
     return render(request,'haipumpfinder/trial.html', sites_dict)

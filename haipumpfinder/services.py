@@ -34,6 +34,18 @@ class TrialLocation:
 class Trial:
     def __int__(self, trial_id):
         self.trial_id = trial_id
+        self.locations = []
+        self.CTGovURL = "https://clinicaltrialsapi.cancer.gov/v1/clinical-trial/" + trial_id
+        
+        data = get_CTJsonData(trial_idl)
+        self.acronym = data["acronym"]  
+        self.brief_title = data["brief_title"]
+        self.official_title = data["official_title"]
+        self.age = data["acronym"]
+    
+    
+    def add_location(self, TrialLocation):
+            self.locations.append(TrialLocation)
 ## creating static methods is bs
 ## need a class that can be instantiated based on 1 JSON query
     @staticmethod 

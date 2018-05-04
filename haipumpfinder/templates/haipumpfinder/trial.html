@@ -20,20 +20,32 @@
           <tr>
             <th scope="col">Cancer Clinic</th>
             <th scope="col">Location</th>
-            <th scope="col">Lat.</th>
-            <th scope="col">Long.</th> 
-            
+            <th hidden scope="col">Lat.</th>
+            <th hidden scope="col">Long.</th> 
+            <th hidden scope="col">Contact</th>
           </tr>
         </thead>
         <tbody>
 
           
     {%  for site in sites_list %}
-        <tr>
+    <tr>
         <td class="Clinic">{{ site.site_name }} </td>
-        <td class="CityState">{{ site.city }}, {{ site.state }} </td>
-        <td class="Lat">{{ site.latitude }}</td>
-        <td class="Long">{{ site.longitude }} </td> 
+        <td class="CityState">{{ site.address_1 }}<br>{{ site.city }}, {{ site.state }} </td>
+        <td hidden>{{ site.latitude }}</td>
+        <td hidden>{{ site.longitude }} </td> 
+        <td hidden> 
+            {% if site.contact_name is not None %}
+                {{ site.contact_name }}
+            {% endif %}  
+                <br> 
+            {% if site.contact_email is not None %}
+            <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a><br>
+            {% endif %}
+            {% if site.contact_phone is not None %}
+            <a href="tel:{{ site.contact_phone }}">{{ site.contact_phone }}</a>  
+            {% endif %} 
+        </td>
     </tr>
     {% endfor %}
   
@@ -100,15 +112,26 @@ function fillMap(callback) {
              'city_state' : this.data()[1],
              'lat' : this.data()[2], 
              'long' : this.data()[3],
+             'contact_info' : this.data()[4],
             });
             
        })
 
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
+        var  content_chunk;
        
         for (i = 0; i < clinics.length; i++) 
         {
+            content_chunk = "";
+
+            console.log("length: " + clinics[i].contact_info.length);
+            if (clinics[i].contact_info.length > 35) { 
+               content_chunk = "<br><br><b>Contact Info:</b><br>" + clinics[i].contact_info;
+              
+              } 
+            console.log(content_chunk);
+
             marker = new google.maps.Marker(
             {
                 position: new google.maps.LatLng(clinics[i].lat, clinics[i].long),
@@ -117,7 +140,11 @@ function fillMap(callback) {
           
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent(clinics[i].name + "<br>" + clinics[i].city_state );
+                    if (clinics[i].contact_info.length > 35) { 
+                        content_chunk = "<br><b>Contact Info:</b><br>" + clinics[i].contact_info;
+                       
+                       } 
+                    infowindow.setContent(clinics[i].name + "<br>" + clinics[i].city_state + content_chunk  );
                     infowindow.open(map, marker);
                 }
             })(marker, i));
