@@ -31,35 +31,30 @@ class TrialLocation:
         self.longitude = lon
 
 
-class Trial:
-    def __int__(self, trial_id):
+class Trial(object):    
+    def __init__(self, trial_id):
         self.trial_id = trial_id
-        self.locations = []
-        self.CTGovURL = "https://clinicaltrialsapi.cancer.gov/v1/clinical-trial/" + trial_id
-        
-        data = get_CTJsonData(trial_idl)
-        self.acronym = data["acronym"]  
+        data = get_CTJsonData(trial_id)
+        self.acronym = data["acronym"]
         self.brief_title = data["brief_title"]
         self.official_title = data["official_title"]
-        self.age = data["acronym"]
-    
-    
-    def add_location(self, TrialLocation):
-            self.locations.append(TrialLocation)
-## creating static methods is bs
-## need a class that can be instantiated based on 1 JSON query
-    @staticmethod 
-    def get_name(trial_id):
-        data = get_CTJsonData(trial_id)
-        if data["acronym"] is not None:
-            result = data["acronym"]
-        elif data["brief_title"] is not None:
-            result = data["brief_title"]
+        ##get a default name
+        if self.acronym is not None:
+            self.name = self.acronym
+        elif self.brief_title is not None:
+            self.name = self.brief_title
         else: 
-            result = data["official_title"]
-       
-        #print("name is " + result)
-        return result
+            self.name = self.official_title
+        
+     
+        self.gender = data["eligibility"]
+        #self.locations = []
+        self.CTGovURL = "https://clinicaltrialsapi.cancer.gov/v1/clinical-trial/" + trial_id
+        
+        
+     
+        
+    
  
     @staticmethod
     def get_locations(trial_id):
@@ -101,7 +96,7 @@ class Trial:
 
 def get_trial(trial_id):
         trial = Trial()  
-        trial.locations(trial_id) 
+        #trial.locations(trial_id) 
         data = get_CTJsonData(trial_id)
         trial.name = data["outcome_measures"][0]["name"] 
         trial.id = data["nct_id"]
@@ -110,10 +105,12 @@ def get_trial(trial_id):
             
             
  #testing
-#trial = get_trial('NCT02928224')
-#locations = trial.locations(trial.id)
-#print("Trial Name " + trial.name)
-#print('num of of locs: ' +  str(len(trial.locations)))
+trial = Trial("NCT02928224") 
+#locations = []
+#locations = trial.get_locations(trial.id)
+print("Trial Name " + trial.name)
+print("URL " + trial.CTGovURL)
+#print('num of of locs: ' + len(locations))
 
 #for location in locations: 
 #        print(location.site_name + " " 

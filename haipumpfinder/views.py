@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, HttpResponse
+from django.shortcuts import get_object_or_404, render, HttpResponse, Http404
 from django.http import HttpResponseRedirect
 from django.template import Context, Template
 from django.urls import reverse
@@ -13,17 +13,19 @@ from .models import Hospital
 
 
 def trial(request,trial_id):
-    t = Trial()
-    trial_name = t.get_name(trial_id) 
+    t = Trial(trial_id) 
     #print("Trial Name: " + trial_name)
-    sites_list = t.get_locations(trial_id) 
-    #print(len(sites_list))
+   
+    print("Trial URL :" + t.CTGovURL)
+    try:
+        sites_list = t.get_locations(trial_id) 
+    except sites_list.extend:
+        raise Http404("error airer") 
+
     sites_dict = {
         'sites_list': sites_list,
-        'trial_name': trial_name,
+        'trial_name': t.name,
         'trial_id': trial_id,
-         
-
     }
     return render(request,'haipumpfinder/trial.html', sites_dict)
 
