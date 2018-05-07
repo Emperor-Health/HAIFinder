@@ -37,6 +37,8 @@ def trial(request,trial_id):
 
 
 
+
+
 class IndexView(generic.ListView):
     page_title = "HAI Pump Finder- Finds clinics offering the HAI Pump"
     template_name = 'haipumpfinder/index.html'
@@ -49,6 +51,7 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Hospital
     template_name = 'haipumpfinder/detail.html'
+
 
 
 class ResultsView(generic.DetailView):

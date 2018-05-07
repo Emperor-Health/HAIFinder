@@ -19,10 +19,16 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return HttpResponseRedirect ('success')
+            return HttpResponseRedirect ('  success')
     else:
         form = SignUpForm()
         print('Form wasnt valid')
         #print(form)
         page_title = "Magnesium & Scorn - Sign up - A New Way to Find Help Fighting Your Cancer"
     return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
+
+def logout(request):
+    return render(request, 'haipumpfinder/logout.html')
+
+def success(request):
+    return render(request, 'haipumpfinder/success.html')
