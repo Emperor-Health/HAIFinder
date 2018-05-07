@@ -1,7 +1,6 @@
-from django.core.urlresolvers import reverse
-from django.urls import resolve
+from django.urls import resolve, reverse
 from django.test import TestCase
-from .views import signup
+from accounts.views import signup
 
 class SignUpTests(TestCase):
     def test_signup_status_code(self):
