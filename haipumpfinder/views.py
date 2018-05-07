@@ -1,21 +1,38 @@
 from django.shortcuts import get_object_or_404, render, HttpResponse, Http404
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.template import Context, Template
+from django.template import Context, Template 
 from django.urls import reverse
 from django.views import generic
 #import pdb; pdb.set_trace()
 from .services import Trial, TrialLocation
 from .models import Hospital
- 
+from .forms import SignUpForm
 
-
-
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST) 
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            #username = form.cleaned_data.get('email')
+            
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return HttpResponseRedirect ('success')
+    else:
+        form = SignUpForm()
+        print('Form wasnt valid')
+        #print(form)
+    return render(request, 'haipumpfinder/signup.html', {'form': form})
 
 
 def trial(request,trial_id):
     t = Trial(trial_id) 
     #print("Trial Name: " + trial_name)
-   
+    page_title = "Trial Finder- Finds clinics offering the " + t.name
     print("Trial URL :" + t.CTGovURL)
     try:
         sites_list = t.get_locations(trial_id) 
@@ -26,6 +43,7 @@ def trial(request,trial_id):
         'sites_list': sites_list,
         'trial_name': t.name,
         'trial_id': trial_id,
+        'page_title': page_title,
     }
     return render(request,'haipumpfinder/trial.html', sites_dict)
 
@@ -38,6 +56,7 @@ def trial(request,trial_id):
 
 
 class IndexView(generic.ListView):
+    page_title = "HAI Pump Finder- Finds clinics offering the HAI Pump"
     template_name = 'haipumpfinder/index.html'
     context_object_name = 'hospital_list'
     def get_queryset(self):

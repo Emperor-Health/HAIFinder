@@ -43,11 +43,17 @@ class Trial(object):
             self.name = self.acronym
         elif self.brief_title is not None:
             self.name = self.brief_title
-        else: 
+        else:
             self.name = self.official_title
         
+        ##get gender
+        self.gender = data["eligibility"]["structured"]["gender"]
+        if self.gender == "BOTH":
+            print("Tests BOTH!")
+            self.gender = "Male & Female" 
      
-        self.gender = data["eligibility"]
+        self.gender = data["eligibility"]["structured"]["gender"]
+        self.age_range = str(data["eligibility"]["structured"]["min_age_number"]) + "-" + str(data["eligibility"]["structured"]["max_age_number"])[0:2]
         #self.locations = []
         self.CTGovURL = "https://clinicaltrialsapi.cancer.gov/v1/clinical-trial/" + trial_id
         
@@ -93,15 +99,7 @@ class Trial(object):
         return locations
   
    
-
-def get_trial(trial_id):
-        trial = Trial()  
-        #trial.locations(trial_id) 
-        data = get_CTJsonData(trial_id)
-        trial.name = data["outcome_measures"][0]["name"] 
-        trial.id = data["nct_id"]
-        return trial
-            
+ 
             
             
  #testing
@@ -110,6 +108,8 @@ trial = Trial("NCT02928224")
 #locations = trial.get_locations(trial.id)
 print("Trial Name " + trial.name)
 print("URL " + trial.CTGovURL)
+print("Gender " + trial.gender)
+print("age range " + trial.age_range)
 #print('num of of locs: ' + len(locations))
 
 #for location in locations: 

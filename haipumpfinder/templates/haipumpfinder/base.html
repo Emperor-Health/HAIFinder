@@ -5,7 +5,17 @@
     
 <meta charset="utf-8">
 <head>   
-<title>HAI Pump Finder- Finds clinics offers the HAI Pump Treatment</title>
+  
+<title>
+        {% block title %}
+          {% if page_title %}
+            {{ page_title }}
+          {% else %}
+            HAI Pump Finder - Find some HAI Pumps near you.
+          {% endif %}
+          
+        {% endblock %}
+</title>
 <meta name="description" content="Find a Cancer Clinic or Hospital offering the HAI PUMP near you. Get directions, meet others trying the HAI Pump by joining Colontown." />
 <meta property="og:title" content="Locations | HAI Pump Clinics" />
 <meta property="og:description" content="Find a Cancer Clinic or Hospital offering the HAI PUMP near you. Get directions, meet others trying the HAI Pump by joining Colontown." />
@@ -21,6 +31,7 @@
 
 </head>
 <body>
+    {% block navbar %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/haipumpfinder">HAI Pump Finder</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +57,7 @@
            
         </div>
       </nav>
-
+      {% endblock navbar %}
 
     
     {% block content %}{% endblock content %}
