@@ -54,9 +54,24 @@
               </li>
               
           </ul>
-           
+          <div class="form-inline my-2 my-lg-0">
+              <button  onclick="goto_signup()" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign Up</button>
+              &nbsp;
+              <button   onclick="goto_login()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+          </div>
+         
         </div>
       </nav>
+      <script>
+          function goto_signup()
+          {
+               location.href = "/haipumpfinder/signup";
+          } 
+          function goto_login()
+          {
+               location.href = "/haipumpfinder/login";
+          } 
+          </script>
       {% endblock navbar %}
 
     
