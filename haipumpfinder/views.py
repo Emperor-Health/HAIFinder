@@ -26,7 +26,8 @@ def signup(request):
         form = SignUpForm()
         print('Form wasnt valid')
         #print(form)
-    return render(request, 'haipumpfinder/signup.html', {'form': form})
+        page_title = "Magnesium & Scorn - Sign up - A New Way to Find Help Fighting your Cancer"
+    return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
 
 
 def trial(request,trial_id):
