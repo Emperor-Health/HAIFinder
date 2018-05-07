@@ -7,27 +7,8 @@ from django.urls import reverse
 from django.views import generic
 #import pdb; pdb.set_trace()
 from .services import Trial, TrialLocation
-from .models import Hospital
-from .forms import SignUpForm
+from .models import Hospital 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST) 
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            #username = form.cleaned_data.get('email')
-            
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return HttpResponseRedirect ('success')
-    else:
-        form = SignUpForm()
-        print('Form wasnt valid')
-        #print(form)
-        page_title = "Magnesium & Scorn - Sign up - A New Way to Find Help Fighting your Cancer"
-    return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
 
 
 def trial(request,trial_id):

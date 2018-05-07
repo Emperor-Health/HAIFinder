@@ -14,7 +14,7 @@ urlpatterns = [
     path('', HPViews.IndexView.as_view(), name='index'),
     path('<int:pk>/', HPViews.DetailView.as_view(), name='detail'),
     path(r'trial/<str:trial_id>', HPViews.trial, name='trial'),
-    path(r'signup/', HPViews.signup, name='signup'), 
-   
+    path(r'signup/', accounts_views.signup, name='signup'),  
+ 
     #path('<int:question_id>/vote/', views.vote, name='vote'),
 ]
