@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/haipumpfinder">HAI Pump Clinics<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'haipumpfinder:index' %}">HAI Pump Clinics<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                     <a class="nav-link" href="/haipumpfinder/what-the-hai">What's a HAI Pump?</a>
@@ -62,11 +62,12 @@
                   <a class="dropdown-item" href="#">My account</a>
                   <a class="dropdown-item" href="#">Change password</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="LOGIN LINK">Log out</a>
+                  <a class="dropdown-item" href="/haipumpfinder/logout">Log out</a>
                 </div>
               </li>
             </ul>
           </div>
+
             {% else %}
           <div class="form-inline my-2 my-lg-0">
               <button  onclick="goto_signup()" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign Up</button>

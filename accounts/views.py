@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404, render, HttpResponse, Http404
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.template import Context, Template 
 from django.urls import reverse
 from django.views import generic  
-from .forms import SignUpForm
+from .forms import SignUpForm 
 
 # Create your views here.
 def signup(request):
@@ -19,7 +19,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return HttpResponseRedirect ('  success')
+            return HttpResponseRedirect ('../success')
     else:
         form = SignUpForm()
         print('Form wasnt valid')
@@ -27,8 +27,14 @@ def signup(request):
         page_title = "Magnesium & Scorn - Sign up - A New Way to Find Help Fighting Your Cancer"
     return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
 
-def logout(request):
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
     return render(request, 'haipumpfinder/logout.html')
 
 def success(request):
     return render(request, 'haipumpfinder/success.html')
+
+
+def login_view(request):
+    return render(request, 'haipumpfinder/login.html')

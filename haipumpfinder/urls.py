@@ -16,6 +16,7 @@ urlpatterns = [
     path(r'trial/<str:trial_id>', HPViews.trial, name='trial'),
     path(r'signup/', accounts_views.signup, name='signup'),  
     path(r'success/', accounts_views.success, name='success'),  
-    path(r'logout/', accounts_views.logout, name='logout'),  
+    path(r'logout/', accounts_views.logout_view, name='logout'),  
+    path(r'login/', accounts_views.login_view, name='login'),  
     #path('<int:question_id>/vote/', views.vote, name='vote'),
 ]
