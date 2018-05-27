@@ -49,7 +49,7 @@ class Trial(object):
         ##get gender
         self.gender = data["eligibility"]["structured"]["gender"]
         if self.gender == "BOTH":
-            print("Tests BOTH!")
+            #print("Tests BOTH!")
             self.gender = "Male & Female" 
      
         self.gender = data["eligibility"]["structured"]["gender"]
@@ -103,13 +103,13 @@ class Trial(object):
             
             
  #testing
-trial = Trial("NCT02928224") 
+#trial = Trial("NCT02928224") 
 #locations = []
 #locations = trial.get_locations(trial.id)
-print("Trial Name " + trial.name)
-print("URL " + trial.CTGovURL)
-print("Gender " + trial.gender)
-print("age range " + trial.age_range)
+#print("Trial Name " + trial.name)
+#print("URL " + trial.CTGovURL)
+#print("Gender " + trial.gender)
+#print("age range " + trial.age_range)
 #print('num of of locs: ' + len(locations))
 
 #for location in locations: 

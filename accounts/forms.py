@@ -1,17 +1,14 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.utils.safestring import mark_safe
+from django.utils.safestring import mark_safe 
+from haipumpfinder.models import Patient
+
 
 class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields.pop('password2')
-    #first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    #first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
-    
-    #last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    #last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}))
     
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Screen '}))
     username.label = mark_safe('<strong>User Name</strong>')
@@ -28,3 +25,10 @@ class SignUpForm(UserCreationForm):
         model = User
         #fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
         fields = ('username', 'email', 'password1' )
+
+class PatientForm(forms.ModelForm):
+   
+
+    class Meta:
+        model = Patient
+        fields = '__all__'

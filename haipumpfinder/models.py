@@ -1,5 +1,50 @@
 from django.db import models 
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+
+class Patient(models.Model):
+    STAGE1 = '1'
+    STAGE2 = '2'
+    STAGE3 = '3'
+    STAGE4 = '4'
+    STAGES = (
+        (STAGE1, 'I'),
+        (STAGE2, 'II'),
+        (STAGE3, 'III'),
+        (STAGE4, 'IV'),
+    )
+    MSISTATUS = (
+        ("MSS", 'MSS'),
+        ("MSIH", 'MSI-H'),
+    )
+   
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dx_date = models.DateField(blank=True, null=True)
+    last_treatment_date = models.DateField(blank=True, null=True)
+    stage_now = models.CharField(
+        max_length=20,
+        choices=STAGES,
+        default=STAGE1,
+    )
+    stage_at_dx = models.CharField(
+        max_length=20,
+        choices=STAGES,
+        default=STAGE1,
+    )
+    msi_status = models.CharField(
+        max_length=20,
+        choices=MSISTATUS,
+        default="MSS",
+    )
+
+    
+    class Meta:
+        managed = True
+        db_table = 'patient'
 
 class Hospital(models.Model):
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.

@@ -2,12 +2,12 @@
 {% extends 'haipumpfinder/base.html' %}
 {% load static %}
 
-{% block title %}Login{% endblock %}
-
-{% block content %} 
+{% block content %}
+ 
 <div class="container">
     <p></p>
-  <h2>Login</h2>
+  <h2> {{ user.username }} is logged in</h2>
+  
   <form method="post">
     {% csrf_token %}
     {{ form.as_p  }}

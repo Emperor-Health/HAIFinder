@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect
 from django.template import Context, Template 
 from django.urls import reverse
 from django.views import generic  
-from .forms import SignUpForm 
+from .forms import SignUpForm
+from accounts.forms import PatientForm
 
 # Create your views here.
 def signup(request):
@@ -22,19 +23,34 @@ def signup(request):
             return HttpResponseRedirect ('../success')
     else:
         form = SignUpForm()
-        print('Form wasnt valid')
+        #print('Form wasnt valid')
         #print(form)
         page_title = "Magnesium & Scorn - Sign up - A New Way to Find Help Fighting Your Cancer"
     return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
 
 def logout_view(request):
+    print("Got here");
     if request.user.is_authenticated:
         logout(request)
-    return render(request, 'haipumpfinder/logout.html')
+    page_title = "Magnesium & Scorn - Sign up - A New Way to Fight Your Cancer"
+    form = SignUpForm()
+    return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
 
 def success(request):
     return render(request, 'haipumpfinder/success.html')
 
 
-def login_view(request):
-    return render(request, 'haipumpfinder/login.html')
+def login_view(request): 
+    print("Got here"); 
+    if request.user.is_authenticated:
+        logout(request)
+    page_title = "Magnesium & Scorn - Sign up - A New Way to Fight Your Cancer"
+    form = SignUpForm()
+    return render(request, 'haipumpfinder/login.html', {'form': form, 'page_title': page_title})
+
+    
+def profile_view(request): 
+    page_title = "Magnesium & Scorn - Profile - A New Way to Fight Your Cancer"
+    form = PatientForm()
+    return render(request, 'haipumpfinder/profile.html', {'form': form, 'page_title': page_title})
+     

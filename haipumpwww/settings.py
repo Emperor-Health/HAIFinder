@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'widget_tweaks',
     
 ]
 
@@ -83,12 +84,12 @@ WSGI_APPLICATION = 'haipumpwww.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbHAIPump',
-        'USER': 'HaiPumpAdmin',
+        'USER': 'postgres',
         'PASSWORD': 'Kemeny123$$',
-        'HOST': 'dbhaipumpfinder.cldssuli5jvk.us-east-2.rds.amazonaws.com',
-        'PORT': '3306',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -131,3 +132,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '../profile'

@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from array import array
 from django.conf.urls import url
 from django.contrib import admin 
-
+from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
 from haipumpfinder import views as HPViews
 app_name = 'haipumpfinder'
@@ -16,7 +16,10 @@ urlpatterns = [
     path(r'trial/<str:trial_id>', HPViews.trial, name='trial'),
     path(r'signup/', accounts_views.signup, name='signup'),  
     path(r'success/', accounts_views.success, name='success'),  
-    path(r'logout/', accounts_views.logout_view, name='logout'),  
-    path(r'login/', accounts_views.login_view, name='login'),  
-    #path('<int:question_id>/vote/', views.vote, name='vote'),
+    path(r'logout/', accounts_views.logout_view, name='logout'), 
+    path(r'profile/', accounts_views.profile_view, name='profile'),   
+    #path(r'login/', auth_views.login, name='login'),
+    path(r'login/', auth_views.login, {'template_name': 'haipumpfinder/login.html'}, name='login'),
+    #path(r'login/', Login, name='login'), 
+     
 ]
