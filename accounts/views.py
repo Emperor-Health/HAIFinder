@@ -6,13 +6,15 @@ from django.template import Context, Template
 from django.urls import reverse
 from django.views import generic  
 from .forms import SignUpForm
-from accounts.forms import PatientForm
+from accounts.forms import PatientForm, UserForm
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 # Create your views here.
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST) 
-        if form.is_valid():
+        if form.is_valid(): 
             form.save()
             username = form.cleaned_data.get('username')
             #username = form.cleaned_data.get('email')
@@ -48,9 +50,43 @@ def login_view(request):
     form = SignUpForm()
     return render(request, 'haipumpfinder/login.html', {'form': form, 'page_title': page_title})
 
-    
+@login_required    
 def profile_view(request): 
+    u_p = request.user.patient
+    u = request.user
+   
     page_title = "Magnesium & Scorn - Profile - A New Way to Fight Your Cancer"
+    patient_form = PatientForm(request.POST or None, instance=u_p)
+    user_form = UserForm(request.POST or None, instance=u)
+    return render(request, 'haipumpfinder/profile.html', {
+        'user_form': user_form,
+        'patient_form': patient_form, 
+        'page_title': page_title})
+
+@login_required
+@transaction.atomic
+def update_patient(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        patient_form = PatientForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and patient_form.is_valid():
+            user_form.save()
+            patient_form.save()
+            messages.success(request, _('Your profile was successfully updated!'))
+            return redirect('settings:patient')
+        else:
+            messages.error(request, _('Please correct the error below.'))
+    else:
+        user_form = UserForm(instance=request.user)
+        patient_form = PatientForm(instance=request.user.profile)
+    return render(request, 'profiles/profile.html', {
+        'user_form': user_form,
+        'patient_form': patient_form
+    })
+
+@login_required    
+def treatment_add(request): 
+    page_title = "Magnesium & Scorn - Add a treatment "
     form = PatientForm()
-    return render(request, 'haipumpfinder/profile.html', {'form': form, 'page_title': page_title})
+    return render(request, 'haipumpfinder/treatmentadd.html', {'form': form, 'page_title': page_title})
      

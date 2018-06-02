@@ -17,7 +17,10 @@ urlpatterns = [
     path(r'signup/', accounts_views.signup, name='signup'),  
     path(r'success/', accounts_views.success, name='success'),  
     path(r'logout/', accounts_views.logout_view, name='logout'), 
-    path(r'profile/', accounts_views.profile_view, name='profile'),   
+
+    path(r'profile/', accounts_views.profile_view, name='profile'), 
+    
+    path(r'add-treatment/', accounts_views.treatment_add, name='add_treatment'),   
     #path(r'login/', auth_views.login, name='login'),
     path(r'login/', auth_views.login, {'template_name': 'haipumpfinder/login.html'}, name='login'),
     #path(r'login/', Login, name='login'), 

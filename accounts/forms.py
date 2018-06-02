@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe 
 from haipumpfinder.models import Patient
-
+from django.contrib.admin.widgets import AdminDateWidget
 
 class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
@@ -28,7 +28,16 @@ class SignUpForm(UserCreationForm):
 
 class PatientForm(forms.ModelForm):
    
+    dx_date = forms.DateField(widget=AdminDateWidget)
+    dx_date.label = mark_safe('<strong>DX Date</strong>')
+    last_treatment_date = forms.DateField(widget=AdminDateWidget)
+    last_treatment_date.label = mark_safe('<strong>Last Treatment</strong>')
 
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = ('dx_date', 'last_treatment_date', 'ned', 'stage_now', 'stage_at_dx', 'msi_status', 'biomarkers')
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
