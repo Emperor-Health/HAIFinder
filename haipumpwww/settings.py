@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'dbHAIPump',
         'USER': 'HaiPumpAdmin',
         'PASSWORD': 'Kemeny123$$',
-        'HOST': 'pgsql-haipump.cldssuli5jvk.us-east-2.rds.amazonaws.com',
+        'HOST': '172.31.4.177',
         'PORT': '5432',
     },
      'local-db': {
