@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% extends 'haipumpfinder/base.html' %}
+{% load static %}
+
+{% block content %}
+<style type="text/css">
+    .table tr button { opacity:0; float:right }
+    .table tr:hover button { opacity:1 }
+  
+  </style>
+
+ <div class="trialcontainer">
+  
+{% if trials_list %}
+<table id="TrialsTable" class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">NCT ID</th>
+                <th scope="col">Trial Name</th>
+                <th scope="col">Phase</th>
+                <th scope="col">Date Added</th>
+                <th scope="col">Location(s)</th>
+                <th scope="col">Immuno</th>
+                <th scope="col">Prior Immuno</th> 
+                <th scope="col">CRC Specific</th>
+                <th scope="col">Status</th>
+                <th scope="col">Drug</th>    
+            </tr>
+        </thead>
+        <tbody>
+          
+    {%  for trial in trials_list  %}
+    <tr>
+        <td class="Clinic"><button type="button" class="btn btn-default">Follow</button>{{ trial.nct_id }} </td>
+        <td class="CityState"> {{ trial.trial_name }}</td>
+        <td class="Clinic">{{ trial.phase }} </td>
+        <td class="CityState"> {{ trial.date_added }}</td>
+        <td class="Clinic">{{ trial.locations }} </td>
+        <td class="CityState"> {{ trial.immuno }}</td>
+        <td class="Clinic">{{ trial.prior_immuno }} </td>
+        <td class="CityState"> {{ trial.crc }}</td>
+        <td class="CityState"> {{ trial.status }}</td>
+        <td class="CityState"> {{ trial.drugs }}</td>
+    </tr>
+    {% endfor %}
+  
+</tbody>
+</table>
+
+{% else %}
+    <p>No trials are available.</p>
+{% endif %}
+</div>
+<script>
+
+    //make the datatable
+          $(document).ready(function() {
+              $('#TrialsTable').DataTable({
+                  "pageLength": 25,
+                  "lengthChange": false,
+                  "fixedHeader": true,
+                  "columnDefs": [
+                  {
+                     "targets": [ 2 ],
+                      "visible": false,
+                      "searchable": false
+                  },
+                  {
+                  "targets": [ 3 ],
+                   "visible": false
+                   }
+                          ]
+              });
+          } );
+</script>               
+   
+{% endblock %}

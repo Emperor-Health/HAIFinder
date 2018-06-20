@@ -15,7 +15,7 @@ def trial(request,trial_id):
     t = Trial(trial_id) 
     #print("Trial Name: " + trial_name)
     page_title = "Trial Finder- Finds clinics offering the " + t.name
-    print("Trial URL :" + t.CTGovURL)
+    #print("Trial URL :" + t.CTGovURL)
     try:
         sites_list = t.get_locations(trial_id) 
     except sites_list.extend:

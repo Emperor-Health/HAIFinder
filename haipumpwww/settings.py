@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'widget_tweaks',
+    'trialfinder',
     
 ]
 
@@ -84,6 +84,14 @@ WSGI_APPLICATION = 'haipumpwww.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbHAIPump',
+        'USER': 'HaiPumpAdmin',
+        'PASSWORD': 'Kemeny123$$',
+        'HOST': 'pgsql-haipump.cldssuli5jvk.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
+    },
+     'local-db': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbHAIPump',
         'USER': 'postgres',
@@ -132,5 +140,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = '../profile'
+LOGOUT_REDIRECT_URL = '/haipumpfinder/accounts/login'
+LOGIN_REDIRECT_URL = '/haipumpfinder/profile'
