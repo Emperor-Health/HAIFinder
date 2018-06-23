@@ -29,7 +29,9 @@ ALLOWED_HOSTS = [
   'dev.haipump.com',
   '18.188.159.199',
   'localhost',
-  '127.0.0.1'
+  '127.0.0.1',
+  'ip-172-31-3-142.us-east-2.compute.internal', 
+  'loc.haipump.com',    
 ]
 
 
@@ -83,18 +85,18 @@ WSGI_APPLICATION = 'haipumpwww.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'AWS-default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbHAIPump',
-        'USER': 'HaiPumpAdmin',
+        'NAME': 'dbTrialFinder',
+        'USER': 'TrialFinderAdmin',
         'PASSWORD': 'Kemeny123$$',
         'HOST': 'pgsql-haipump.cldssuli5jvk.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     },
-     'local-db': {
+     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbHAIPump',
-        'USER': 'postgres',
+        'NAME': 'dbTrialFinder',
+        'USER': 'TrialFinderAdmin',
         'PASSWORD': 'Kemeny123$$',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -142,3 +144,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGOUT_REDIRECT_URL = '/haipumpfinder/accounts/login'
 LOGIN_REDIRECT_URL = '/haipumpfinder/profile'
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'template').replace('\\','/'),
+)   
