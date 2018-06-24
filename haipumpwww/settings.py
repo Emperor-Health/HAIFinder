@@ -100,6 +100,14 @@ DATABASES = {
         'PASSWORD': 'Kemeny123$$',
         'HOST': 'localhost',
         'PORT': '5432',
+    },
+      'aact': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'aact',
+        'USER': 'TrialFinderAdmin   ',
+        'PASSWORD': 'Kemeny123$$',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
