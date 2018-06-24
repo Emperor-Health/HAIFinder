@@ -3,16 +3,12 @@
 {% load static %}
 
 {% block content %}
-<style type="text/css">
-    .table tr button { opacity:0; float:right }
-    .table tr:hover button { opacity:1 }
-  
-  </style>
+
 
  <div class="trialcontainer">
   
 {% if trials_list %}
-<table id="TrialsTable" class="table table-hover" style="width:100%">
+<table id="TrialsTable" class="table table-hover" >
         <thead>
             <tr>
                 <th scope="col">NCT ID</th>

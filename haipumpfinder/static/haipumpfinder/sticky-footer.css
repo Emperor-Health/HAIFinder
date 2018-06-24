@@ -21,13 +21,4 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-.container {
-  width: auto;
-  max-width: 680px;
-  padding: 0 15px;
-}
-.trialcontainer {
-  width: auto; 
-  padding: 0 555px;
-}
  

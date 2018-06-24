@@ -3,9 +3,6 @@
         height: 800px;
     } 
     
-             
-.table tr button { opacity:0; float:right }
-.table tr:hover button { opacity:1 }
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -17,7 +14,9 @@
     padding: 0 15px;
   }
   .trialcontainer {
-    width: auto; 
-    padding: 0 555px;
+    width: 1000pt; 
+    padding: 0 15px;
   }
    
+.table tr button { opacity:0; float:right }
+.table tr:hover button { opacity:1 }
