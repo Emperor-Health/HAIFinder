@@ -5,19 +5,16 @@ from django.http import HttpResponseRedirect
 from django.template import Context, Template 
 from django.urls import reverse
 from django.views import generic
-from .services import get_trials, Trial    
+from .services import get_trials  
 # Create your views here.
 
 def index(request): 
          
         #print("Trial Name: " + trial_name)
         page_title = "Trial Finder" 
-        try:
-                trials_list = get_trials() 
-        except trials_list.extend:
-                raise Http404("error airer") 
+        trials_list = get_trials()  
 
-        trials_dict = {
+        trials_dict = { 
                 'trials_list': trials_list,
                 'page_title': page_title,
         }

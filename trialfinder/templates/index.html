@@ -8,7 +8,7 @@
  <div class="trialcontainer">
   
 {% if trials_list %}
-<table id="TrialsTable" class="table table-hover" >
+<table id="TrialsTable" class="table table-hover" width="100%">
         <thead>
             <tr>
                 <th scope="col">NCT ID</th>
@@ -18,26 +18,27 @@
                 <th scope="col">Location(s)</th>
                 <th scope="col">Immuno</th>
                 <th scope="col">Prior Immuno</th> 
-                <th scope="col">CRC Specific</th>
-                <th scope="col">Status</th>
-                <th scope="col">Drug</th>    
+                <th scope="col">CRC Specific</th> 
+                <th scope="col">Drug(s)</th>    
             </tr>
         </thead>
         <tbody>
           
     {%  for trial in trials_list  %}
     <tr>
-        <td class="Clinic"><button type="button" class="btn btn-default">Follow</button>{{ trial.nct_id }} </td>
-        <td class="CityState"> {{ trial.brief_title }}</td>
-        <td class="Clinic">{{ trial.phase }} </td>
-        <td class="CityState"> {{ trial.current_trial_status }}</td>
-        <td class="CityState"> {{ trial.phase }}</td>   <s></s>
-        <td class="Clinic">LOCATIONS </td>
-        <td class="CityState">IMMUNO</td>
-        <td class="Clinic">PRIOR IMMUNO </td>
-        <td class="CityState"> CRC?</td>
-        <td class="CityState"> status</td>
-        <td class="CityState"> drugsxs</td>
+        <td><button type="button" class="btn btn-default">Follow</button>
+            <a href="https://clinicaltrials.gov/ct2/show/{{ trial.trial_id }}" target="_new">{{ trial.trial_id }}</a> </td>
+        <td> {{ trial.name }}</td>
+        <td> {{ trial.current_trial_status }}</td>
+        <td>{{ trial.phase }} </td> 
+        <td> {%  for state in trial.unique_states  %}
+                     {{  state  }}  
+                {% endfor %}
+        </td>
+        <td>IMMUNO</td>
+        <td>PRIOR IMMUNO </td>
+        <td>CRC?</td> 
+        <td>drugsxs</td>
     </tr>
     {% endfor %}
   
@@ -59,8 +60,7 @@
                   "columnDefs": [
                   {
                      "targets": [ 2 ],
-                      "visible": false,
-                      "searchable": false
+                      "visible": false 
                   },
                   {
                   "targets": [ 3 ],

@@ -2,37 +2,33 @@ import json
 import urllib.request
 import ssl 
 from collections import namedtuple
+from haipumpfinder.services import TrialLocation, Trial, get_CTJsonDataForSingleTrial
 
+
+ct_api_url = "https://clinicaltrialsapi.cancer.gov/v1/clinical-trials"
+result_size = "100"
+search_term = "colorectal"
 
 #returns the json data
-def get_CTJsonData():
+def get_CTJsonDataAllTrials(result_size, search_term):
     context = ssl._create_unverified_context()   
-    url1 = "https://clinicaltrialsapi.cancer.gov/v1/clinical-trials" 
+    url1 = ct_api_url + "?size=" + result_size + "&_fulltext=" + search_term
     with urllib.request.urlopen(url1 , 
         context=context) as url:
             data = json.loads(url.read().decode()) 
             return data
 
-class Trial:
-    def __init__(self, nct_id, brief_title, current_trial_status, phase):
-        self.nct_id = nct_id
-        self.brief_title = brief_title
-        self.current_trial_status = current_trial_status
-        self.phase = phase 
-
+ 
+ 
 
 
 def get_trials():
         trials = []
-        data = get_CTJsonData()
+        trials_jsondata = get_CTJsonDataAllTrials(result_size, search_term)
             #print(len(data["sites"]));
-        for x in range(0, len(data["trials"])):
-            t = Trial(
-                data["trials"][x]["nct_id"],
-                data["trials"][x]["brief_title"],
-                data["trials"][x]["current_trial_status"],
-                data["trials"][x]["phase"]["phase"])
-           
+        for x in range(0, len(trials_jsondata["trials"])):
+                #print(data)
+            t = Trial(trials_jsondata["trials"][x]["nct_id"])
             trials.append(t)
             #print(len(locations))  
         return trials
@@ -43,12 +39,18 @@ def get_trials():
             
  #testing
 
- #trials = get_trials() 
+ 
 
- #for trial in trials: 
-  #       print(trial.nct_id) 
-   #      print(trial.brief_title)  
-    #     print(trial.current_trial_status) 
-    #     print(trial.phase) 
+#for trial in get_trials(): 
+#    print(trial.trial_id) 
+#    print(trial.brief_title)  
+#    print(trial.current_trial_status) 
+#    print(trial.phase) 
+#    t = Trial(trial.trial_id)
+
+#    for location in t.locations:
+#        print(location.site_name)
+#        print(location.state)
+        
         
      
