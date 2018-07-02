@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'haipumpwww.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'AWS-default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbTrialFinder',
         'USER': 'TrialFinderAdmin',
@@ -93,7 +93,7 @@ DATABASES = {
         'HOST': 'pgsql-haipump.cldssuli5jvk.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     },
-     'default': {
+     'local-default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbTrialFinder',
         'USER': 'TrialFinderAdmin',
@@ -104,7 +104,7 @@ DATABASES = {
       'aact': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'aact',
-        'USER': 'TrialFinderAdmin   ',
+        'USER': 'TrialFinderAdmin',
         'PASSWORD': 'Kemeny123$$',
         'HOST': 'localhost',
         'PORT': '5432',
