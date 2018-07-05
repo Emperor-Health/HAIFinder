@@ -23,7 +23,7 @@ urlpatterns = [
     
     #path(r'add-treatment/', accounts_views.treatment_add, name='add_treatment'),   
     #path(r'login/', auth_views.login, name='login'),
-    #path(r'login/', accounts_views.login_view, name='login'),
+    path(r'login/', accounts_views.login_view, name='login'),
     #path(r'login/', Login, name='login'), 
      
 ]
