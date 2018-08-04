@@ -40,7 +40,7 @@ def signup(request):
     return render(request, 'haipumpfinder/signup.html', {'form': form, 'page_title': page_title})
 
 def login_view(request):
-    #print("Got here");
+    print("Got hereXXX");
     if request.user.is_authenticated:
         logout(request)
     page_title = "Magnesium & Scorn - Sign up - A New Way to Fight Your Cancer"

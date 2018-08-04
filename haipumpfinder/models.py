@@ -41,7 +41,7 @@ class BiomarkersLookUp(models.Model):
 
 class Treatment(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, editable=False)
-    desciption = models.TextField(max_length=255)
+    description = models.TextField(max_length=255)
     trial_id = models.CharField(max_length=100)
     dose_schedule = models.TextField(max_length=255)
     start_date = models.DateField(blank=True, null=True)

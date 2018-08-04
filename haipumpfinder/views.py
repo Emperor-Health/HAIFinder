@@ -43,6 +43,7 @@ class IndexView(generic.ListView):
     page_title = "HAI Pump Finder- Finds clinics offering the HAI Pump"
     template_name = 'haipumpfinder/index.html'
     context_object_name = 'hospital_list'
+    print(Hospital.objects.count())
     def get_queryset(self):
         """Return all published hospitals."""
         return Hospital.objects.order_by('id')
