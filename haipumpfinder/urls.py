@@ -14,16 +14,13 @@ urlpatterns = [
     path('', HPViews.IndexView.as_view(), name='index'),
     path('<int:pk>/', HPViews.DetailView.as_view(), name='detail'),
     path(r'trial/<str:trial_id>', HPViews.trial, name='trial'),
-    path('accounts/', include('django.contrib.auth.urls')),
     path(r'signup/', accounts_views.signup, name='signup'),  
-    path(r'success/', accounts_views.success, name='success'),  
-    #path(r'logout/', accounts_views.logout_view, name='logout'), 
-    path(r'logout/', auth_views.logout, name='logout'),  
+    path(r'success/', accounts_views.success, name='success'),
     path(r'profile/', accounts_views.profile_view, name='profile'), 
       
-    #path(r'add-treatment/', accounts_views.treatment_add, name='add_treatment'),   
-    path(r'login/', auth_views.login, name='login'),
-    #path(r'login/', accounts_views.login_view, name='login'),
-    #path(r'login/', Login, name='login'), 
-     
+    #path(r'add-treatment/', accounts_views.treatment_add, name='add_treatment'), 
+       
+    path(r'logout/', auth_views.logout, name='logout'),    
+    path(r'login/', auth_views.login, name='login'), 
+    #path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, HttpResponse, Http404, redirect
+from django.shortcuts import get_object_or_404, render, HttpResponse, Http404, redirect, HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -55,7 +55,7 @@ def logout_view(request):
         logout(request)
     page_title = "Magnesium & Scorn - Sign up - A New Way to Fight Your Cancer"
     form = SignUpForm()
-    return render(request, 'haipumpfinder/login.html', {'form': form, 'page_title': page_title})
+    return HttpResponseRedirect('haipumpfinder/login.html')
 
 def success(request):
     return render(request, 'haipumpfinder/success.html')

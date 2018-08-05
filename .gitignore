@@ -9,3 +9,5 @@ accounts/__pycache__/forms.cpython-36.pyc
 *.pyc
 accounts/__pycache__/forms.cpython-36.pyc
 accounts/__pycache__/forms.cpython-36.pyc
+*.pyc
+haipumpfinder/__pycache__/urls.cpython-36.pyc
