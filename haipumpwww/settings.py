@@ -65,7 +65,7 @@ ROOT_URLCONF = 'haipumpwww.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,7 +142,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-LOGOUT_REDIRECT_URL = '/haipumpfinder/accounts/login'
+LOGOUT_REDIRECT_URL = '/haipumpfinder/login'
 LOGIN_REDIRECT_URL = '/haipumpfinder/profile'
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'template').replace('\\','/'),
