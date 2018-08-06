@@ -5,6 +5,7 @@ from django.conf.urls import url
 from django.contrib import admin 
 from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
+from trialfinder import views as trialfinder_views
 from haipumpfinder import views as HPViews
 app_name = 'haipumpfinder'
 
@@ -18,7 +19,7 @@ urlpatterns = [
     path(r'success/', accounts_views.success, name='success'),
     path(r'profile/', accounts_views.profile_view, name='profile'), 
       
-    #path(r'add-treatment/', accounts_views.treatment_add, name='add_treatment'), 
+    path(r'add-treatment/', accounts_views.add_treatment, name='add_treatment'), 
     path(r'password_change/', auth_views.password_change, name='password_change'),   
     path(r'logout/', auth_views.logout, name='logout'),    
     path(r'login/', auth_views.login, name='login'), 

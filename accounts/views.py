@@ -88,7 +88,7 @@ def profile_view(request):
 
  
 @login_required    
-def treatment_add(request): 
+def add_treatment(request): 
     page_title = "Magnesium & Scorn - Add a treatment "
     form = PatientForm()
     return render(request, 'haipumpfinder/treatmentadd.html', {'form': form, 'page_title': page_title})

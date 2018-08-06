@@ -19,5 +19,6 @@ from django.urls import include, path
 urlpatterns = [
     path('haipumpfinder/', include('haipumpfinder.urls')),
     path('admin/', admin.site.urls),
-    path('trialfinder/', include('trialfinder.urls')),
+    path('trialfinder/', include('trialfinder.urls', namespace="trialfinder")),
+    
 ]
