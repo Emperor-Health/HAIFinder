@@ -126,8 +126,8 @@ us = trial.unique_states
 #print("age range " + trial.age_range)
 #print('num of of locs: ' + len(locations))
 
-for state in us: 
-       print(state) 
+#for state in us: 
+       #print(state) 
 #        + location.city + " " 
 #        + location.state_province + " " 
 #        + location.lat + " " 

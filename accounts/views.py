@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.template import Context, Template 
 from django.urls import reverse
 from django.views import generic        
-from accounts.forms import PatientForm, UserForm, SignUpForm 
+from accounts.forms import PatientForm, UserForm, SignUpForm, Add_TreatmentForm 
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.conf import settings 
@@ -90,6 +90,6 @@ def profile_view(request):
 @login_required    
 def add_treatment(request): 
     page_title = "Magnesium & Scorn - Add a treatment "
-    form = PatientForm()
+    form = Add_TreatmentForm()
     return render(request, 'haipumpfinder/treatmentadd.html', {'form': form, 'page_title': page_title})
      

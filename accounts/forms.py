@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe 
-from haipumpfinder.models import Patient
+from haipumpfinder.models import Patient, Treatment
 from django.contrib.admin.widgets import AdminDateWidget
 
 class SignUpForm(UserCreationForm):
@@ -38,6 +38,26 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ('dx_date', 'last_treatment_date', 'ned', 'stage_now', 'stage_at_dx', 'msi_status', 'biomarkers')
+
+class Add_TreatmentForm(forms.ModelForm):
+   
+  
+    description = forms.CharField(widget=forms.TextInput)
+    trial_id = forms.CharField(widget=forms.TextInput)
+    dose_schedule = forms.CharField(widget=forms.TextInput)
+    start_date = forms.DateField(widget=AdminDateWidget)
+    start_date.label = mark_safe('<strong>DX Date</strong>')
+    last_treatment_date = forms.DateField(widget=AdminDateWidget)
+    response = forms.CharField(widget=forms.TextInput)
+    treatment_notes = forms.CharField(widget=forms.TextInput)
+    side_effect = forms.CharField(widget=forms.TextInput)
+
+
+    class Meta:
+        model = Treatment
+        fields = ('description', 'dose_schedule', 'dose_schedule', 
+                'start_date', 'last_treatment_date',
+                'response', 'treatment_notes', 'side_effect')
 
 class UserForm(forms.ModelForm):
     class Meta:
