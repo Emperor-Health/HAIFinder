@@ -32,6 +32,37 @@
     </div>
 
 </div>
+<div class="row">
+{% if treatment_list %}
+
+  <table id="TreatmentTable" class="table table-hover" style="width:100%">
+        <thead>
+          <tr>
+            <th scope="col">Treatment Date</th>
+            <th scope="col">SOME Identifier</th> 
+            
+          </tr>
+        </thead>
+        <tbody>
+
+          
+    {%  for treatment in treatment_list %}
+        <tr>
+        <td> {{ treatment.start_date }} </td>
+        <td class="Description">{{ treatment.description }} </td>
+        
+    </tr>
+    {% endfor %}
+  
+</tbody>
+</table>
+{% else %}
+No Treatments found
+{% endif %}
+
+</div>
+
+
   <div class="row">
           <div class="col-sm" style=" border: 1px solid; width:200px;" >
                 <a href="{% url 'haipumpfinder:add_treatment' %}" class="btn btn-default">Add a Treatment</a>

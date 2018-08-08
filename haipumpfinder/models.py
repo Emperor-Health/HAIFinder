@@ -84,6 +84,7 @@ def create_or_update_user_patient(sender, instance, created, **kwargs):
 def save_user_patient(sender, instance, **kwargs):
     instance.patient.save()
 
+DEFAULT_PATIENT_ID = 1
 class Treatment(models.Model):
     description = models.TextField(max_length=255)
     trial_id = models.CharField(max_length=100)
@@ -93,14 +94,14 @@ class Treatment(models.Model):
     response = models.TextField(max_length=255)
     treatment_notes = models.TextField(max_length=255)
     side_effect = models.TextField(max_length=255)
-    #patient = models.ForeignKey(Patient)
+    patient = models.ForeignKey(Patient, default = DEFAULT_PATIENT_ID,  on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.desciption
 
     class Meta:
         ordering = ('start_date',) 
-        db_table = 'patient_treatments'
+        db_table = 'treatment'
 
 class Hospital(models.Model):
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.

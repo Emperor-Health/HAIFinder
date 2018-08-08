@@ -11,13 +11,13 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.conf import settings 
 from django.views.generic import FormView, RedirectView
-from haipumpfinder.models import Patient
+from haipumpfinder.models import Patient, Treatment
 
 # Create your views here.
 def signup(request):
     if request.user.is_authenticated:
         logout(request)
-    page_title = "Magnesium & Scorn - Sign up - A New Way to Find Help Fighting Your Cancer"
+    page_title = "Magnesium & Hope - Sign up - A New Way to Find Help Fighting Your Cancer"
     if request.method == 'POST':
         form = SignUpForm(request.POST) 
         if form.is_valid(): 
@@ -44,7 +44,7 @@ def login_view(request):
     print("Log IN Got hereXXX");
     if request.user.is_authenticated:
         logout(request)
-    page_title = "Magnesium & Scorn - Sign up - A New Way to Fight Your Cancer"
+    page_title = "Magnesium & Hope - Sign up - A New Way to Fight Your Cancer"
     form = SignUpForm()
     return render(request, 'haipumpfinder/login.html', {'form': form, 'page_title': page_title})
 
@@ -54,7 +54,7 @@ def logout_view(request):
     print("LOG OUT Got here");
     if request.user.is_authenticated:
         logout(request)
-    page_title = "Magnesium & Scorn - Sign up - A New Way to Fight Your Cancer"
+    page_title = "Magnesium & Hope - Sign up - A New Way to Fight Your Cancer"
     form = SignUpForm()
     return HttpResponseRedirect('haipumpfinder/login.html')
 
@@ -65,7 +65,7 @@ def success(request):
 @login_required
 @transaction.atomic   
 def profile_view(request): 
-    page_title = "Magnesium & Scorn - Update your Profile"
+    page_title = "Magnesium & Hope - Update your Profile"
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         patient_form = PatientForm(request.POST, instance=request.user.patient)
@@ -92,11 +92,11 @@ def profile_view(request):
 @login_required
 @transaction.atomic     
 def add_treatment(request):
-    page_title = "Magnesium & Scorn - Add a treatment "
+    page_title = "Magnesium & Hope - Add a treatment "
     try:
-        p = user.patient
-        #treatment_list = 
-    except sites_list.extend:
+
+         treatment_list = Treatment.objects.order_by('start_date')
+    except treatment_list.extend:
         raise Http404("error airer") 
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
@@ -112,5 +112,14 @@ def add_treatment(request):
     else: 
         
         treatment_form = TreatmentForm()
-    return render(request, 'haipumpfinder/treatmentadd.html', {'form':  treatment_form, 'page_title': page_title})
+    return render(request, 'haipumpfinder/treatmentadd.html', {'form':  treatment_form, 
+    'treatment_list': treatment_list,
+    'page_title': page_title})
      
+
+@login_required
+@transaction.atomic     
+def detail_treatment(request):
+    page_title = "Treatment Detail"
+    return render(request, 'haipumpfinder/detailtreatment.html',
+    {'page_title': page_title})

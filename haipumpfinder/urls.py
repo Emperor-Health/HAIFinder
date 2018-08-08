@@ -18,7 +18,8 @@ urlpatterns = [
     path(r'signup/', accounts_views.signup, name='signup'),  
     path(r'success/', accounts_views.success, name='success'),
     path(r'profile/', accounts_views.profile_view, name='profile'), 
-      
+    
+    path(r'detail-treatment/', accounts_views.detail_treatment, name='detail_treatment'),   
     path(r'add-treatment/', accounts_views.add_treatment, name='add_treatment'), 
     path(r'password_change/', auth_views.password_change, name='password_change'),   
     path(r'logout/', auth_views.logout, name='logout'),    
