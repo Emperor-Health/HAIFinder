@@ -13,13 +13,13 @@ from .models import Hospital
 
 def trial(request,trial_id):
     t = Trial(trial_id) 
-    #print("Trial Name: " + trial_name)
+    print("Trial Name: " + t.name)
     page_title = "Trial Finder- Finds clinics offering the " + t.name
     #print("Trial URL :" + t.CTGovURL)
     try:
-        sites_list = t.get_locations(trial_id) 
-    except sites_list.extend:
-        raise Http404("error airer") 
+        sites_list = t.locations 
+    except:
+        raise Http404("Trial ID not found") 
 
     sites_dict = {
         'sites_list': sites_list,
@@ -43,7 +43,7 @@ class IndexView(generic.ListView):
     page_title = "HAI Pump Finder- Finds clinics offering the HAI Pump"
     template_name = 'haipumpfinder/index.html'
     context_object_name = 'hospital_list'
-    print(Hospital.objects.count())
+    #print(Hospital.objects.count())
     def get_queryset(self):
         """Return all published hospitals."""
         return Hospital.objects.order_by('id')

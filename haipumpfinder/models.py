@@ -39,22 +39,7 @@ class BiomarkersLookUp(models.Model):
     class Meta:
         ordering = ('name',)  
 
-class Treatment(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, editable=False)
-    description = models.TextField(max_length=255)
-    trial_id = models.CharField(max_length=100)
-    dose_schedule = models.TextField(max_length=255)
-    start_date = models.DateField(blank=True, null=True)
-    last_treatment_date = models.DateField(blank=True, null=True)
-    response = models.TextField(max_length=255)
-    treatment_notes = models.TextField(max_length=255)
-    side_effect = models.TextField(max_length=255)
 
-    def __str__(self):
-        return self.desciption
-
-    class Meta:
-        ordering = ('start_date',) 
 
 class Patient(models.Model):
 
@@ -83,6 +68,7 @@ class Patient(models.Model):
     )
 
     biomarkers = models.ManyToManyField(BiomarkersLookUp)
+    
    
     class Meta:
         managed = True
@@ -97,6 +83,24 @@ def create_or_update_user_patient(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_patient(sender, instance, **kwargs):
     instance.patient.save()
+
+class Treatment(models.Model):
+    description = models.TextField(max_length=255)
+    trial_id = models.CharField(max_length=100)
+    dose_schedule = models.TextField(max_length=255)
+    start_date = models.DateField(blank=True, null=True)
+    last_treatment_date = models.DateField(blank=True, null=True)
+    response = models.TextField(max_length=255)
+    treatment_notes = models.TextField(max_length=255)
+    side_effect = models.TextField(max_length=255)
+    #patient = models.ForeignKey(Patient)
+
+    def __str__(self):
+        return self.desciption
+
+    class Meta:
+        ordering = ('start_date',) 
+        db_table = 'patient_treatments'
 
 class Hospital(models.Model):
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.

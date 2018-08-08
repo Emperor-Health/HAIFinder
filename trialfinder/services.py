@@ -41,15 +41,15 @@ def get_trials():
 
  
 
-#for trial in get_trials(): 
-#    print(trial.trial_id) 
-#    print(trial.brief_title)  
+for trial in get_trials(): 
+    print(trial.trial_id) 
+    print(trial.brief_title)  
 #    print(trial.current_trial_status) 
 #    print(trial.phase) 
-#    t = Trial(trial.trial_id)
+    #t = Trial(trial.trial_id)
 
-#    for location in t.locations:
-#        print(location.site_name)
+    #for location in t.locations:
+       #print(location.site_name)
 #        print(location.state)
         
         

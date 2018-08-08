@@ -6,11 +6,12 @@ from django.http import HttpResponseRedirect
 from django.template import Context, Template 
 from django.urls import reverse
 from django.views import generic        
-from accounts.forms import PatientForm, UserForm, SignUpForm, Add_TreatmentForm 
+from accounts.forms import PatientForm, UserForm, SignUpForm,   TreatmentForm 
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.conf import settings 
 from django.views.generic import FormView, RedirectView
+from haipumpfinder.models import Patient
 
 # Create your views here.
 def signup(request):
@@ -87,9 +88,29 @@ def profile_view(request):
         'page_title': page_title})
 
  
-@login_required    
-def add_treatment(request): 
+
+@login_required
+@transaction.atomic     
+def add_treatment(request):
     page_title = "Magnesium & Scorn - Add a treatment "
-    form = Add_TreatmentForm()
-    return render(request, 'haipumpfinder/treatmentadd.html', {'form': form, 'page_title': page_title})
+    try:
+        p = user.patient
+        #treatment_list = 
+    except sites_list.extend:
+        raise Http404("error airer") 
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        treatment_form = TreatmentForm(request.POST, instance=request.user.patient)
+        if user_form.is_valid() and treatment_form.is_valid():
+            user_form.save()
+            treatment_form.save()
+            messages.success(request, ('Your treatment was successfully added!'))
+            return redirect('haipumpfinder:add_treatment')
+        else:
+
+            messages.error(request, ('Please correct the error below.'))
+    else: 
+        
+        treatment_form = TreatmentForm()
+    return render(request, 'haipumpfinder/treatmentadd.html', {'form':  treatment_form, 'page_title': page_title})
      

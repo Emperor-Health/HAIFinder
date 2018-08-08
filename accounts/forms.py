@@ -39,16 +39,18 @@ class PatientForm(forms.ModelForm):
         model = Patient
         fields = ('dx_date', 'last_treatment_date', 'ned', 'stage_now', 'stage_at_dx', 'msi_status', 'biomarkers')
 
-class Add_TreatmentForm(forms.ModelForm):
-   
-  
-    description = forms.CharField(widget=forms.TextInput)
+class TreatmentForm(forms.ModelForm):
+
+    description = forms.CharField(widget=forms.Textarea)
+    description.label = mark_safe('<strong>Describe the treatment</strong>')
     trial_id = forms.CharField(widget=forms.TextInput)
     dose_schedule = forms.CharField(widget=forms.TextInput)
     start_date = forms.DateField(widget=AdminDateWidget)
-    start_date.label = mark_safe('<strong>DX Date</strong>')
+    start_date.label = mark_safe('<strong>State Date</strong>')
     last_treatment_date = forms.DateField(widget=AdminDateWidget)
-    response = forms.CharField(widget=forms.TextInput)
+    last_treatment_date .label = mark_safe('<strong>Last Treatment Date</strong>')
+    response = forms.CharField(widget=forms.Textarea)
+    response.label = mark_safe('<strong>Describe the response</strong>')
     treatment_notes = forms.CharField(widget=forms.TextInput)
     side_effect = forms.CharField(widget=forms.TextInput)
 

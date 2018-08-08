@@ -116,7 +116,7 @@ def get_locations(sites_json, trial_id):
             
             
  #testing
-trial = Trial("NCT02928224") 
+trial = Trial("NCT02928224")  
 locations = []
 locations = trial.locations 
 us = trial.unique_states
