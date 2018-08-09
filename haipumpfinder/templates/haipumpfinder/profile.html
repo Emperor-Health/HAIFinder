@@ -17,27 +17,13 @@
   <form method="post">
     {% csrf_token %}
     {{ user_form.as_p }}
+    {{ user_form.as_p.errors }}
     {{ patient_form.as_p }}
     {{ patient_form.as_p.errors }}
-    {{ user_form.as_p.errors }}
     <button type="submit">Update Profile</button>
   </form>
 </div>
-  <div class="container">
-    <p></p>
-    <p></p><p></p><p></p> 
-    <div class="row">
-      <div class="col-sm" style=" border: 1px solid; width:200px;" >
-          Treatments:
-      </div>
- 
-</div>
-    <div class="row">
-            <div class="col-sm" style=" border: 1px solid; width:200px;" >
-                  <a href="{% url 'haipumpfinder:add_treatment' %}" class="btn btn-default">Add a Treatment</a>
+   
 
-              </div>
-       
-</div>
-</div> 
-{% endblock %}
+ {% include "haipumpfinder/treatmentslist.html" %}
+ {% endblock %}

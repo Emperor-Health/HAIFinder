@@ -44,6 +44,7 @@ class TreatmentForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea)
     description.label = mark_safe('<strong>Describe the treatment</strong>')
     trial_id = forms.CharField(widget=forms.TextInput)
+    trial_id.label = mark_safe('<strong>NCI Trial ID</strong>')
     dose_schedule = forms.CharField(widget=forms.TextInput)
     start_date = forms.DateField(widget=AdminDateWidget)
     start_date.label = mark_safe('<strong>State Date</strong>')
@@ -52,12 +53,11 @@ class TreatmentForm(forms.ModelForm):
     response = forms.CharField(widget=forms.Textarea)
     response.label = mark_safe('<strong>Describe the response</strong>')
     treatment_notes = forms.CharField(widget=forms.TextInput)
-    side_effect = forms.CharField(widget=forms.TextInput)
-
+    side_effect = forms.CharField(widget=forms.TextInput) 
 
     class Meta:
         model = Treatment
-        fields = ('description', 'dose_schedule', 'dose_schedule', 
+        fields = ('description', 'trial_id', 'dose_schedule', 'dose_schedule', 
                 'start_date', 'last_treatment_date',
                 'response', 'treatment_notes', 'side_effect')
 
