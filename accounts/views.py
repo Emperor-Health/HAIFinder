@@ -62,7 +62,7 @@ def success(request):
     return render(request, 'haipumpfinder/success.html')
 
        
-@login_required
+@login_required(login_url="../login/")
 @transaction.atomic   
 def profile_view(request): 
     page_title = "Magnesium & Hope - Update your Profile"
