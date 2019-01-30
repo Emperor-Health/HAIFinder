@@ -16,9 +16,12 @@
 {% endif %}
 <form method="post">
   {% csrf_token %} 
-  {{ treatment_form.as_p }}
-  {{ treatment_form.as_p.errors }}  
-  <button type="submit">Add Treatment</button>
+  <table>
+  {{ treatment_form.as_table }}
+  {{ treatment_form.as_table.errors }}  
+</table>
+
+<button type="submit">Add Treatment</button>
 </form>
 </div>
 {% include "haipumpfinder/treatmentslist.html" %}

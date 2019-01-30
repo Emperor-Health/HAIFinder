@@ -20,6 +20,7 @@
           <tr>
             <th scope="col">Cancer Clinic</th>
             <th scope="col">Location</th>
+            <th scope="col">Phone</th>
             <th scope="col">Lat.</th>
             <th scope="col">Long.</th>
             <th scope="col"># of HAI Pumps/Year</th>
@@ -33,7 +34,8 @@
     {%  for hospital in hospital_list %}
         <tr>
         <td><a href="{% url 'haipumpfinder:detail' hospital.id %}">{{ hospital.name }}</a></td>
-        <td class="CityState">{{ hospital.city }}, {{ hospital.state }} </td>
+        <td class="CityState">{{ hospital.city }}, {{ hospital.state }} </td>      
+        <td class="Phone"><a href="tel:{{ hospital.phone }}">{{ hospital.phone }}</td>      
         <td class="Lat">{{ hospital.latitude }}</td>
         <td class="Long">{{ hospital.longitude }} </td>
        <td><span class="badge badge-primary badge-pill"> {{ hospital.guestimated_of_hai_implants_per_year }}</span></td>
@@ -102,10 +104,11 @@ function fillMap(callback) {
        HaiPumpTable.rows().every(function(){
            clinics.push({'name' : this.data()[0], 
              'city_state' : this.data()[1],
-             'lat' : this.data()[2], 
-             'long' : this.data()[3],
-             'number_of_pumps' : this.data()[4],
-             'ct_patients' : this.data()[5],
+             'phone' : this.data()[2],
+             'lat' : this.data()[3], 
+             'long' : this.data()[4],
+             'number_of_pumps' : this.data()[5],
+             'ct_patients' : this.data()[6],
             });
             
        })
@@ -123,6 +126,7 @@ function fillMap(callback) {
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
                     infowindow.setContent(clinics[i].name + "<br>" + clinics[i].city_state + 
+                    "<br>Phone: " +  clinics[i].phone + 
                     "<br># of Pumps Implanted: " +  clinics[i].number_of_pumps + 
                     "<br>Colontown Patients: " +  clinics[i].ct_patients );
                     infowindow.open(map, marker);

@@ -16,11 +16,16 @@
 {% endif %}
   <form method="post">
     {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ user_form.as_p.errors }}
-    {{ patient_form.as_p }}
-    {{ patient_form.as_p.errors }}
-    <button type="submit">Update Profile</button>
+  <table>
+    {{ user_form.as_table }}
+    {{ user_form.as_table.errors }}
+    </table>
+    <table>
+    {{ patient_form.as_table }}
+    {{ patient_form.as_table.errors }}
+  </table>
+
+  <button type="submit">Update Profile</button>
   </form>
 </div>
    

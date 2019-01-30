@@ -25,14 +25,7 @@ SECRET_KEY = 'yt5dc8tb%(u!io7z973ta5k+o$7bo=!jbt8r(+c!fzdn3+iz=^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-  'dev.haipump.com',
-  '18.188.159.199',
-  'localhost',
-  '127.0.0.1',
-  'ip-172-31-3-142.us-east-2.compute.internal', 
-  'loc.haipump.com',    
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
