@@ -38,8 +38,7 @@ class BiomarkersLookUp(models.Model):
 
     class Meta:
         ordering = ('name',)  
-
-
+ 
 
 class Patient(models.Model):
 

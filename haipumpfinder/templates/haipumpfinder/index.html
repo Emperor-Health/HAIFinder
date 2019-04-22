@@ -35,7 +35,7 @@
         <tr>
         <td><a href="{% url 'haipumpfinder:detail' hospital.id %}">{{ hospital.name }}</a></td>
         <td class="CityState">{{ hospital.city }}, {{ hospital.state }} </td>      
-        <td class="Phone"><a href="tel:{{ hospital.phone }}">{{ hospital.phone }}</td>      
+        <td class="Phone"><a href="tel:{{ hospital.phone }}">{{ hospital.phone }}</a></td>      
         <td class="Lat">{{ hospital.latitude }}</td>
         <td class="Long">{{ hospital.longitude }} </td>
        <td><span class="badge badge-primary badge-pill"> {{ hospital.guestimated_of_hai_implants_per_year }}</span></td>
@@ -63,12 +63,12 @@
                 "lengthChange": false,
                 "columnDefs": [
                 {
-                   "targets": [ 2 ],
+                   "targets": [ 3 ],
                     "visible": false,
                     "searchable": false
                 },
                 {
-                "targets": [ 3 ],
+                "targets": [ 4 ],
                  "visible": false
                  }
                         ]

@@ -13,6 +13,7 @@
                             window.history.back();
                         }
                         </script>
+            
             <p></p>
             <h1>{{ hospital.name }}</h1>
             <p>Short intro</p>      
@@ -23,7 +24,9 @@
                   <div class="col-sm-2">
                         {{ hospital.address }} 
                   </div>
+                   
             </div>
+      
             <div class="row">
                   <div class="col-sm-2">
                    City: 
@@ -31,6 +34,15 @@
                   <div class="col-sm-2">
                       {{ hospital.city }}, {{ hospital.state }} {{ hospital.zip }}    
                   </div>
+            </div>
+               <div class="row">
+                  <div class="col-sm-2">
+                  Phone: 
+                  </div>
+                  <div class="col-sm-2">
+                        {{ hospital.phone }} 
+                  </div>
+                   
             </div>
             <div class="row">
                         <div class="col-sm-2">

@@ -13,6 +13,7 @@
         <table id="TreatmentTable" class="table table-hover" style="width:100%">
               <thead>
                 <tr>
+                  <th scope="col">ID</th>
                   <th scope="col">Treatment Description</th>
                   <th scope="col">SOME Identifier</th> 
                   
@@ -23,6 +24,8 @@
                 
           {%  for treatment in treatment_list %}
               <tr>
+              <td><a href="{% url 'haipumpfinder:detail' treatment.id %}">{{ treatment.id }}</a></td>
+        
               <td> {{ treatment.start_date }} </td>
               <td class="Description">{{ treatment.description }} </td>
               

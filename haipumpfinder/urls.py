@@ -24,5 +24,6 @@ urlpatterns = [
     path(r'password_change/', auth_views.password_change, name='password_change'),   
     path(r'logout/', auth_views.logout, name='logout'),    
     path(r'login/', auth_views.login, name='login'), 
+    path(r'trial/<str:trial_id>', HPViews.trial, name='treatment'),
     #path('accounts/', include('django.contrib.auth.urls')),
-]
+ ]
